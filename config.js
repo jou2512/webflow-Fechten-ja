@@ -1,4 +1,4 @@
-
+console.log("new")
 var home_url = "https://fen-cing.webflow.io/dashboard"
 var login_path = "/login"
 var firebaseConfig = {
