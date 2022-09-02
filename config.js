@@ -84,22 +84,24 @@ auth.onAuthStateChanged(user => {
     resolve(user)
 })
 })
-
-
-var checking = await authService.authenticated().then(() => { 
-    var curUrl = new URL(window.location.href);
-    var logincheck = curUrl.pathname.indexOf('login') === -1;
-    var signupncheck = curUrl.pathname.indexOf('sign-up') === -1;
-    var dashboardcheck = curUrl.pathname === '/';
-    var finishRegisCheck = curUrl.pathname.indexOf('finishregister') === -1;
-    console.log(logincheck,signupncheck,dashboardcheck,finishRegisCheck,curUrl.pathname)
-    if(!authService.user && logincheck && signupncheck && finishRegisCheck){
-        document.location.href = login_path;
-    } else if(authService.user && (!(logincheck && signupncheck && !dashboardcheck) && finishRegisCheck)){
-        document.location.href = home_url;
-    }
-    console.log(authService.user)
-    return true;
-})
+var checking = false;
+async function main() {
+    checking = await authService.authenticated().then(() => { 
+        var curUrl = new URL(window.location.href);
+        var logincheck = curUrl.pathname.indexOf('login') === -1;
+        var signupncheck = curUrl.pathname.indexOf('sign-up') === -1;
+        var dashboardcheck = curUrl.pathname === '/';
+        var finishRegisCheck = curUrl.pathname.indexOf('finishregister') === -1;
+        console.log(logincheck,signupncheck,dashboardcheck,finishRegisCheck,curUrl.pathname)
+        if(!authService.user && logincheck && signupncheck && finishRegisCheck){
+            document.location.href = login_path;
+        } else if(authService.user && (!(logincheck && signupncheck && !dashboardcheck) && finishRegisCheck)){
+            document.location.href = home_url;
+        }
+        console.log(authService.user)
+        return true;
+    })
+}
+main()
 console.log(checking)
 window.authService = authService;
