@@ -84,9 +84,9 @@ auth.onAuthStateChanged(user => {
     resolve(user)
 })
 })
-var checking = false;
-async function main() {
-    checking = await authService.authenticated().then(() => { 
+
+var startfunc = async function main() {
+    await authService.authenticated().then(() => { 
         var curUrl = new URL(window.location.href);
         var logincheck = curUrl.pathname.indexOf('login') === -1;
         var signupncheck = curUrl.pathname.indexOf('sign-up') === -1;
@@ -102,6 +102,5 @@ async function main() {
         return true;
     })
 }
-main()
-console.log(checking)
+startfunc()
 window.authService = authService;
