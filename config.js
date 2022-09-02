@@ -86,7 +86,7 @@ auth.onAuthStateChanged(user => {
 })
 
 
-authService.authenticated().then(() => { 
+var checking = await authService.authenticated().then(() => { 
     var curUrl = new URL(window.location.href);
     var logincheck = curUrl.pathname.indexOf('login') === -1;
     var signupncheck = curUrl.pathname.indexOf('sign-up') === -1;
@@ -99,6 +99,7 @@ authService.authenticated().then(() => {
         document.location.href = home_url;
     }
     console.log(authService.user)
+    return true;
 })
-
+console.log(checking)
 window.authService = authService;
