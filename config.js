@@ -15,6 +15,7 @@ measurementId: "G-47527PPD7X"
 // Initialize Firebase
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const analytics = firebase.analytics();
+var functions = firebase.functions();
 
 const auth = firebase.auth()
 console.log(auth)
@@ -85,7 +86,7 @@ auth.onAuthStateChanged(user => {
 })
 })
 
-var startfunc = async function main() {
+const startfunc = async function main() {
     await authService.authenticated().then(() => { 
         var curUrl = new URL(window.location.href);
         var logincheck = curUrl.pathname.indexOf('login') === -1;
@@ -103,4 +104,5 @@ var startfunc = async function main() {
     })
 }
 startfunc()
+console.log("testen")
 window.authService = authService;
